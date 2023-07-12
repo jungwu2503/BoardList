@@ -7,8 +7,8 @@ public class BoardVO {
 	private String title;
 	private String writer;
 	private String contents;
-	private Date cdt; //积己老
-	private Date mdt; //荐沥老
+	private Date cdt; //create date
+	private Date mdt; //modify date
 	private int flag;
 	
 	@Override
