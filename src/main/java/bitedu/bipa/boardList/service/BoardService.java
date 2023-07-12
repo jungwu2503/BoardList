@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import bitedu.bipa.boardList.dao.BoardDAO;
 import bitedu.bipa.boardList.vo.BoardVO;
 
-@Service
+@Service("BOardService")
 public class BoardService {
 	
 	@Autowired

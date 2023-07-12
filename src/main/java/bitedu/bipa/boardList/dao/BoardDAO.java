@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import bitedu.bipa.boardList.utils.ConnectionManager;
 import bitedu.bipa.boardList.vo.BoardVO;
 
-@Repository
+@Repository("BoardDAO")
 public class BoardDAO {
 	
 	@Autowired

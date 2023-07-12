@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,21 +20,21 @@ public class BoardController {
 	@Autowired
 	private BoardService bs;
 	//**insert url later**//
-//	@RequestMapping(value="/", method.RequestMethod.GET)
+	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public ModelAndView list() {
-		System.out.println("list");
-		System.out.println("list");
 		System.out.println("list");
 		ModelAndView mav = new ModelAndView();
 		ArrayList<BoardVO> list = bs.searchAll();
+		mav.addObject("list",list);
+		mav.setViewName("./manager/board_list");
 		return mav;
 	}
 	//**insert url later**//
-//	@RequestMapping(value="/", method.RequestMethod.GET)
+	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
 	public ModelAndView delete(@RequestParam("no") String no) {
 		ModelAndView mav = new ModelAndView();
 		boolean flag = bs.deleteBoard(no);
-		mav.setViewName("");	//**insert url later**//
+		mav.setViewName("redirect:list.do");
 		return mav;
 	}
 	
