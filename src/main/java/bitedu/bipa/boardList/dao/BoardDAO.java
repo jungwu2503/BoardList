@@ -9,19 +9,21 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import bitedu.bipa.boardList.utils.ConnectionManager;
 import bitedu.bipa.boardList.vo.BoardVO;
 
+@Repository
 public class BoardDAO {
 	
 	@Autowired
-	private DataSource dataSource;
-//	private ConnectionManager manager;
-//	
-//	public BoardDAO() {
-//		manager = ConnectionManager.getInstance();
-//	}
+//	private DataSource dataSource;
+	private ConnectionManager manager;
+	
+	public BoardDAO() {
+		manager = ConnectionManager.getInstance();
+	}
 	
 	//search board list all
 	public ArrayList<BoardVO> searchAll(){
@@ -30,7 +32,8 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;		
 		try {
-			con = dataSource.getConnection();
+//			con = dataSource.getConnection();
+			con = manager.getConnection();
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -45,7 +48,8 @@ public class BoardDAO {
 				board.setFlag(rs.getInt(7));
 				list.add(board);
 			}
-			con.close();
+			manager.closeConnection(rs, pstmt, con);
+//			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,14 +65,16 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = dataSource.getConnection();
+//			con = dataSource.getConnection();
+			con = manager.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, parseInt);
 			int affectedCount = pstmt.executeUpdate();
 			if(affectedCount > 0) {
 				flag = true;
 			}
-			con.close();
+//			con.close();
+			manager.closeConnection(null, pstmt, con);
 		} 
 		catch (SQLException e) {
 			// TODO: handle exception
