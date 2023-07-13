@@ -105,5 +105,27 @@ public class BoardDAO {
 		}
 		return board;
 	}
+	
+	public boolean update(BoardVO board) {
+		boolean flag = false;
+		String sql = "update boardlist set contents=?";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con=dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, board.getContents());
+			int affectedCount = pstmt.executeUpdate();
+			if(affectedCount>0) {
+				flag = true;
+			}
+			con.close();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return flag;
+	}
 
 }
