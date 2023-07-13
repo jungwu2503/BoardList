@@ -31,5 +31,11 @@ public class BoardService {
 		board = dao.select(Integer.parseInt(boardNo));
 		return board;
 	}
+	
+	public boolean updateBoard(BoardVO board) {
+		boolean flag = false;
+		flag = dao.update(board);
+		return flag;
+	}
 
 }
