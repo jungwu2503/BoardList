@@ -16,16 +16,20 @@ public class BoardService {
 	
 	//search list all
 	public ArrayList<BoardVO> searchAll(){
-		System.out.println("search");
 		ArrayList<BoardVO> list = dao.searchAll();
 		return list;
 	}
 	
 	public boolean deleteBoard(String no) {
 		boolean flag = false;
-		System.out.println("delete");		
 		flag = dao.delete(Integer.parseInt(no));
 		return flag;
+	}
+	
+	public BoardVO select(String boardNo) {
+		BoardVO board = new BoardVO();
+		board = dao.select(Integer.parseInt(boardNo));
+		return board;
 	}
 
 }

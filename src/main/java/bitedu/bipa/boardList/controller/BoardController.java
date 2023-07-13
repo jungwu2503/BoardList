@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,11 +32,22 @@ public class BoardController {
 	}
 	//**insert url later**//
 	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
-	public ModelAndView delete(@RequestParam("no") String no) {
+	public ModelAndView delete(@RequestParam("boardNo") String boardNo) {
 		ModelAndView mav = new ModelAndView();
-		boolean flag = bs.deleteBoard(no);
+		boolean flag = bs.deleteBoard(boardNo);
 		mav.setViewName("redirect:list.do");
 		return mav;
 	}
+	
+	@RequestMapping(value="/view_detail", method=RequestMethod.GET)
+	public ModelAndView view_detail(@RequestParam("boardNo") String boardNo) {
+		ModelAndView mav = new ModelAndView();
+		BoardVO board = bs.select(boardNo);
+		mav.addObject("board", board);
+		mav.setViewName("./manager/board_detail");
+		return mav;
+	}
+	
+
 	
 }

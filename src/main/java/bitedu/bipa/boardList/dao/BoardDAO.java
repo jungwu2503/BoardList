@@ -81,5 +81,29 @@ public class BoardDAO {
 		}
 		return flag;
 	}
+	
+	public BoardVO select(int parseInt) {
+		BoardVO board = null;
+		String sql = "select contents from board where no = ?";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, parseInt);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				board = new BoardVO();
+				board.setContents(rs.getString(1));
+			}
+			con.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return board;
+	}
 
 }
