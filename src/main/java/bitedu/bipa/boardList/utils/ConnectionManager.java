@@ -24,7 +24,7 @@ public class ConnectionManager {
       String jdbcURL = "jdbc:mysql://localhost:3306/boardlist?serverTimezone=UTC&allowPublicKeyRetrieval=true";
       String driver = "com.mysql.cj.jdbc.Driver";
       String id = "root";
-      String pwd = "1234";
+      String pwd = "root";
       
       try {
          Class.forName(driver);
